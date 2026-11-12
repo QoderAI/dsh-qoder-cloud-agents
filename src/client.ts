@@ -116,6 +116,7 @@ export class QoderCloudClient {
     return this.call(signal, () => this.sdk.environments.create({
       name,
       config: { type: 'cloud', networking: { type: 'unrestricted' } },
+      metadata: { source: 'dsh' },
     }, post(signal)))
   }
 
@@ -124,11 +125,17 @@ export class QoderCloudClient {
   }
 
   createAgent(body: CreateAgentRequest, signal?: AbortSignal): Promise<AgentView> {
-    return this.call(signal, () => this.sdk.agents.create(body, post(signal)))
+    return this.call(signal, () => this.sdk.agents.create({
+      ...body,
+      metadata: { ...body.metadata, source: 'dsh' },
+    }, post(signal)))
   }
 
   createSession(body: CreateSessionRequest, signal?: AbortSignal): Promise<SessionView> {
-    return this.call(signal, () => this.sdk.sessions.create(body, post(signal)))
+    return this.call(signal, () => this.sdk.sessions.create({
+      ...body,
+      metadata: { ...body.metadata, source: 'dsh' },
+    }, post(signal)))
   }
 
   getSession(id: string, signal?: AbortSignal): Promise<SessionView> {

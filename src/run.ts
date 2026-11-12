@@ -251,7 +251,6 @@ export async function startQoderCloudRun(
       agent: target.agent,
       environment_id: target.environmentId,
       title,
-      metadata: { source: 'deepseek-harness' },
       ...resources.length === 0 ? {} : { resources },
       ...Object.keys(spec.environmentVariables).length === 0
         ? {}

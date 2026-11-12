@@ -224,13 +224,19 @@ describe('qoder-cloud-agents provider', () => {
     const calls = mock.requests.map(r => `${r.method} ${r.path}`)
     expect(calls).toContain('POST /agents')
     const agent = mock.requests.find(r => r.method === 'POST' && r.path === '/agents')!.body
-    expect(agent).toMatchObject({ name: 'dsh-qoder-cloud-delegate', model: 'ultimate', tools: [{ type: 'agent_toolset_20260401' }] })
+    expect(agent).toMatchObject({
+      name: 'dsh-qoder-cloud-delegate',
+      model: 'ultimate',
+      tools: [{ type: 'agent_toolset_20260401' }],
+      metadata: { source: 'dsh' },
+    })
     const session = mock.requests.find(r => r.method === 'POST' && r.path === '/sessions')!
     expect(session.headers['idempotency-key']).toBeTruthy()
     expect(session.body).toMatchObject({
       agent: 'agent_new',
       environment_id: 'env_1',
       title: 'Fix the flaky test',
+      metadata: { source: 'dsh' },
       resources: [{ type: 'github_repository', url: 'https://github.com/acme/widgets.git', mount_path: '/data/workspace/widgets', checkout: { type: 'branch', name: 'main' }, authorization_token: 'ghp_test' }],
     })
     const message = mock.posted.find(e => e.type === 'user.message')
@@ -360,6 +366,16 @@ async function mountWith(services: (typeof Service<any>)[], config: plugin.Confi
 }
 
 describe('environment / agent selection', () => {
+  it('tags an automatically created environment with the dsh source', async () => {
+    const mock = await startMockQoder({ stream: idleStream })
+    cleanups.push(mock.close)
+    const { provider } = await mountWith([], { token: 'pt-test', baseURL: mock.baseURL, agentId: 'agent_x' })
+    const result = await (await start(provider, plain, 'x')).result
+    expect(result.stopReason).toBe('completed')
+    expect(mock.requests.find(r => r.method === 'POST' && r.path === '/environments')?.body)
+      .toMatchObject({ name: 'dsh-default', metadata: { source: 'dsh' } })
+  })
+
   it('uses explicit config without listing anything', async () => {
     const mock = await startMockQoder({ environments: ENVIRONMENTS, stream: idleStream })
     cleanups.push(mock.close)

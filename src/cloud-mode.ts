@@ -299,7 +299,7 @@ export class QoderCloudAdapter extends LlmAdapter {
         agent: target.agent,
         environment_id: target.environmentId,
         title: 'DeepSeek Harness cloud mode',
-        metadata: { source: 'deepseek-harness', mode: 'cloud' },
+        metadata: { mode: 'cloud' },
         ...resources.length === 0 ? {} : { resources },
         ...Object.keys(options.environmentVariables).length === 0
           ? {}
