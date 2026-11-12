@@ -128,7 +128,7 @@ describe('qoder-cloud-agents adapter', () => {
     expect(created).toMatchObject({
       agent: 'agent_1',
       environment_id: 'env_1',
-      metadata: { mode: 'cloud' },
+      metadata: { source: 'dsh', mode: 'cloud' },
       resources: [{ type: 'github_repository', url: 'https://github.com/acme/widgets.git', mount_path: '/data/workspace/widgets', authorization_token: 'ghp_test' }],
     })
     const message = mock.posted.find(e => e.type === 'user.message')!.content[0].text as string

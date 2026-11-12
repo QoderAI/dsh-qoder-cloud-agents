@@ -339,7 +339,6 @@ export class TargetResolver {
       system: this.options.system,
       description: 'Managed by the DeepSeek Harness dsh-qoder-cloud-agents plugin',
       tools: [{ type: AGENT_TOOLSET }],
-      metadata: { source: 'deepseek-harness' },
     }, signal)
   }
 }
