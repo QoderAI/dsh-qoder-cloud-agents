@@ -1,5 +1,5 @@
 {
-  "name": "dsh-qoder-cloud-agents",
+  "name": "@qoder/dsh-qoder-cloud-agents",
   "description": "DeepSeek Harness plugin that runs sessions and delegated tasks on Qoder Cloud Agents sandboxes",
   "homepage": "https://github.com/QoderAI/dsh-qoder-cloud-agents#readme",
   "repository": {
@@ -93,5 +93,9 @@
   },
   "dependencies": {
     "qoder-cloud-agents-sdk": "npm:qca-sdk@0.8.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

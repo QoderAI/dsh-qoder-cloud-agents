@@ -1,6 +1,6 @@
 - insert:
     - id: qoder-cloud-agents
-      name: 'dsh-qoder-cloud-agents'
+      name: '@qoder/dsh-qoder-cloud-agents'
     - id: tool-qoder-cloud-agents
       name: '@deepseek-ai/dsh-tool-subagent'
       config:
@@ -17,4 +17,4 @@
         order: 50
         plugins:
           - id: qoder-cloud-agents-route
-            name: 'dsh-qoder-cloud-agents/cloud-route'
+            name: '@qoder/dsh-qoder-cloud-agents/cloud-route'
