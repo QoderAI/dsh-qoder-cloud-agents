@@ -37,12 +37,12 @@
    npm pack
    ```
 
-   得到 `qoder-dsh-qoder-cloud-agents-0.1.0.tgz`。把它放到一个固定目录（例如 `~/dsh-plugins/`），profile 里记录的是这个路径。
+   得到 `dsh-qoder-cloud-agents-0.1.0.tgz`。把它放到一个固定目录（例如 `~/dsh-plugins/`），profile 里记录的是这个路径。
 
 2. 安装到 dsh 的 web profile（其他 profile 换成对应名字），路径必须是绝对路径：
 
    ```bash
-   dsh plugin --profile web add ~/dsh-plugins/qoder-dsh-qoder-cloud-agents-0.1.0.tgz
+   dsh plugin --profile web add ~/dsh-plugins/dsh-qoder-cloud-agents-0.1.0.tgz
    ```
 
    Mac / Windows 客户端：在侧边栏「插件」→ 安装插件，填 tgz 的绝对路径。
@@ -61,7 +61,7 @@
 
    ```yaml
    - id: qoder-cloud-agents
-     name: '@qoder/dsh-qoder-cloud-agents'
+     name: dsh-qoder-cloud-agents
      config:
        gitUsername: your-git-user
    ```
@@ -70,7 +70,7 @@
 
    ```yaml
    - id: qoder-cloud-agents
-     name: '@qoder/dsh-qoder-cloud-agents'
+     name: dsh-qoder-cloud-agents
      config:
        baseURL: https://api.qoder.com/api/v1/cloud
        environmentId: env_xxx        # 不填：首次使用时弹窗选择并记住
@@ -145,7 +145,7 @@ npm test
 
 - 云端 session：子代理工具在配置 `archiveOnFinish: true` 时会自动归档；云端模式和默认配置下 session 保留在 Qoder 控制台，可在控制台归档或删除。
 - 结果分支：不需要时删除远端分支，例如 `git push origin --delete qoder-cloud-agents/xxxxxxxx`。
-- 插件：`dsh plugin --profile web remove @qoder/dsh-qoder-cloud-agents`，然后重启 dsh。`cordis.patch.yml` 里保存的 `environmentId`、`agentId`、`gitUsername` 不会随卸载删除，不需要时手动删掉那一段。
+- 插件：`dsh plugin --profile web remove dsh-qoder-cloud-agents`，然后重启 dsh。`cordis.patch.yml` 里保存的 `environmentId`、`agentId`、`gitUsername` 不会随卸载删除，不需要时手动删掉那一段。
 - 令牌：从 `~/.dsh/.env` 删除 `QODER_PAT`、`QODER_GIT_TOKEN`，并在 Qoder 与 Git 平台吊销不再使用的令牌。
 - 本地构建产物：删除仓库根目录下的 `node_modules/`、`lib/` 和生成的 `.tgz`。
 

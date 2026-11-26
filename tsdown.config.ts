@@ -14,6 +14,6 @@ const entry = (path: string) => ({
 
 export default defineConfig([
   entry('lib/types/index.js'),
-  // The 「云端模式」 preset's child plugin, loaded as `@qoder/dsh-qoder-cloud-agents/cloud-route`.
+  // The 「云端模式」 preset's child plugin, loaded as `dsh-qoder-cloud-agents/cloud-route`.
   entry('lib/types/cloud-route.js'),
 ])
