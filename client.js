@@ -9,7 +9,7 @@
  * React and the UI primitives come from the host.
  */
 window.__ModuleLoader__.load({
-  id: 'dsh-qoder-cloud-agents',
+  id: '@qoder-ai/dsh-qoder-cloud-agents',
   factory(require) {
     const React = require('react')
     const { Switch, IconGlobeOutlineRegular } = require('@deepseek-ai/dsh-client-ui-primitives')
